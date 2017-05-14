@@ -13,6 +13,6 @@ python bot.py
 
 ## License
 
-MIT license
+[MIT license](https://github.com/punkyoon/dust-attack/blob/master/LICENSE)
 
 Copyright (c) 2017 punkyoon(Jiyoon Ha)
