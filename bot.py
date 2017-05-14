@@ -19,7 +19,11 @@ def post_to_channel(idx, msg):
     slack.chat.post_message(CHANNELS[idx], msg, as_user=True)
 
 def extract_message(msg):
-    print(msg)
+    check_cmd = msg.split(' ', 1)
+    if CMD_PREFIX != check_cmd[0]:
+        return 'not command'
+
+    post_to_channel(0, 'show me the money')
 
 # Get message from slack channel
 async def execute_bot():
@@ -27,6 +31,7 @@ async def execute_bot():
     while True:
         msg = await ws.recv()
         ext_msg = json.loads(msg)
+
         if ext_msg['type'] == 'message':
             extract_message(ext_msg['text'])
 
