@@ -11,7 +11,7 @@
 python bot.py
 ```
 
-### License
+## License
 
 MIT license
 
