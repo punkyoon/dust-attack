@@ -1,3 +1,4 @@
+import json
 import pytz
 import asyncio
 import datetime
@@ -17,11 +18,17 @@ sock_endpoint = response.body['url']
 def post_to_channel(idx, msg):
     slack.chat.post_message(CHANNELS[idx], msg, as_user=True)
 
+def extract_message(msg):
+    print(msg)
+
+# Get message from slack channel
 async def execute_bot():
     ws = await websockets.connect(sock_endpoint)
     while True:
         msg = await ws.recv()
-        print(msg)
+        ext_msg = json.loads(msg)
+        if ext_msg['type'] == 'message':
+            extract_message(ext_msg['text'])
 
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
