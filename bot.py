@@ -1,15 +1,11 @@
 import json
-import pytz
 import asyncio
-import datetime
 import websockets
 
-from bs4 import BeautifulSoup as bs
 from slacker import Slacker
 
 from conf import *
 
-tz = pytz.timezone('Asia/Seoul')
 slack = Slacker(TOKEN)
 
 response = slack.rtm.start()
@@ -18,6 +14,7 @@ sock_endpoint = response.body['url']
 def post_to_channel(idx, msg):
     slack.chat.post_message(CHANNELS[idx], msg, as_user=True)
 
+# Send message to slack channel
 def extract_message(msg):
     cmd = msg.split(' ')
     if CMD_PREFIX != cmd[0]:
@@ -25,13 +22,13 @@ def extract_message(msg):
 
     if 1 < len(cmd):
         if cmd[1] == 'help':
-            post_to_channel(0, 'Can I help you?')
+            post_to_channel(1, 'Can I help you?')
         elif cmd[1] == 'test':
-            post_to_channel(0, 'Show me the money')
+            post_to_channel(1, 'Show me the money')
         else:
-            post_to_channel(0, '????')
+            post_to_channel(1, '????')
     else:
-        post_to_channel(0, '@dust-attack help')
+        post_to_channel(1, '@dust-attack help')
 
 
 # Get message from slack channel
