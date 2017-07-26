@@ -1,3 +1,4 @@
+import re
 import json
 import asyncio
 import websockets
@@ -5,6 +6,7 @@ import websockets
 from slacker import Slacker
 
 from conf import *
+from dust import Dust
 
 slack = Slacker(TOKEN)
 
@@ -22,9 +24,15 @@ def extract_message(msg):
 
     if 1 < len(cmd):
         if cmd[1] == 'help':
-            post_to_channel(1, 'Can I help you?')
-        elif cmd[1] == 'test':
-            post_to_channel(1, 'Show me the money')
+            post_to_channel(1, '@dust-attack <지역>')
+        elif bool(re.match('[가-힣]+', cmd[1])):
+            dust = Dust(API_KEY)
+            location = dust.getLocation(cmd[1])
+            if location == None:
+                post_to_channel(1, '잘못된 지역입니다.')
+            else:
+                aqi = dust.getDust(location)
+                post_to_channel(1, aqi)
         else:
             post_to_channel(1, '????')
     else:
