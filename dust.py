@@ -36,7 +36,9 @@ class Dust():
         else:
             msg = '좋음: 대기오염 관련 질환자군에서도 영향이 유발되지 않을 수준'
         
-        return msg
+        full_msg = '현재 대기 품질 지수(AQI)는 ' + str(dust) + '이며, 현재 대기상황은 ' + msg + '입니다.'
+
+        return full_msg
 
 if __name__ == '__main__':
     dust = Dust('demo')
