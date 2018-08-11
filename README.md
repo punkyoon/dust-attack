@@ -19,4 +19,4 @@ python bot.py
 
 [MIT license](https://github.com/punkyoon/dust-attack/blob/master/LICENSE)
 
-Copyright (c) 2017 punkyoon(Jiyoon Ha)
+Copyright (c) 2018 punkyoon(Jiyoon Ha)
